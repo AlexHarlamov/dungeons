@@ -9,7 +9,7 @@ class Dungeon(
     /**
      * Hash that required to compare Dungeon configurations
      *
-     * Additional note: Mathematically, it is exactly 2^28 variants of the possible area configurations for dungeons,
+     * Additional note: Mathematically, it is exactly 2^(X*Y) variants of the possible area configurations for dungeons,
      * but in fact, most of them are not suitable. If we are taking in account the fact, that all the dungeons should
      * have a path through, significantly reducing the number of possible configurations. There is no point in calculating
      * possible amount of dungeons, but in case the fact that one of the main rules is that we have to avoid repetitions
