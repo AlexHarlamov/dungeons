@@ -42,16 +42,16 @@ class Dungeon(
 
     override fun toString(): String = buildString {
         for (x in 0 until area.first().size) {
-            append("0   ")
+            append("0  ")
             for (y in area.indices) {
                 append(
                     when (area[y][x]) {
-                        Block.GROUND -> "0   "
-                        Block.AIR -> "    "
+                        Block.GROUND -> "0  "
+                        Block.AIR -> "   "
                     }
                 )
             }
-            append("0   \n")
+            append("0\n")
         }
     }
 }
