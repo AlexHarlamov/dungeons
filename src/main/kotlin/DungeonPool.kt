@@ -36,13 +36,17 @@ class DungeonPool
     /**
      * Two maps - "flat" representation of the graph edges
      */
-    val poolIn: MutableMap<Int, MutableList<Dungeon>> = mutableMapOf()
-    val poolOut: MutableMap<Int, MutableList<Dungeon>> = mutableMapOf()
+    private val poolIn: MutableMap<Int, MutableList<Dungeon>> = mutableMapOf()
+    private val poolOut: MutableMap<Int, MutableList<Dungeon>> = mutableMapOf()
 
-    var dungeonsNumber = 0
+    private var dungeonsNumber = 0
 
     init {
-        for (i in 0..dungeons.map { it.area }.maxOf { it.size }) {
+        for (i in 0..try {
+            dungeons.map { it.area }.maxOf { it.size }
+        } catch (e: NoSuchElementException) {
+            0
+        }) {
             poolIn[i] = mutableListOf()
             poolOut[i] = mutableListOf()
         }
@@ -81,14 +85,11 @@ class DungeonPool
             Variant.POSITIVE // in that case we can just proceed Y/2 attempts for each node without touching worst case scenario
         }
 
-        println(variant)
-
         return when (variant) {
             Variant.POSITIVE -> {
                 try {
                     positiveVariant(length)
                 } catch (e: OutOfAttemptsException) {
-                    println("Switching strategy")
                     borderVariant(length) // Second attempt to create dungeon with bruteforce strategy
                 }
             }
@@ -114,7 +115,7 @@ class DungeonPool
         }
 
         if (stack.isEmpty()) {
-            throw IllegalArgumentException("Such set of dungeons is not compatible in sequence of length $length")
+            throw IllegalStateException("Such set of dungeons is not compatible in sequence of length $length")
         }
 
         return stack
