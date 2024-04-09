@@ -17,11 +17,11 @@ object DungeonGenerator {
      * Parameters for the form-factor of generated [Dungeon]s
      */
     object Configuration {
-        val xSize = 7               // Size of the dungeon horizontally
-        val ySize = 4               // Size of the dungeon vertically
-        val stdDeviationY = 0.4     // Deviation from the main path exits (increase to make the variety wider)
-        val stdDeviationX = 0.2     // Deviation from the main path (increase to make the path wider)
-        val mean = 0.0              // All the deviations are based on Gauss normal distribution, this parameter controls its mean
+        const val xSize = 7               // Size of the dungeon horizontally
+        const val ySize = 4               // Size of the dungeon vertically
+        const val stdDeviationY = 0.4     // Deviation from the main path exits (increase to make the variety wider)
+        const val stdDeviationX = 0.2     // Deviation from the main path (increase to make the path wider)
+        const val mean = 0.0              // All the deviations are based on Gauss normal distribution, this parameter controls its mean
     }
 
     /**

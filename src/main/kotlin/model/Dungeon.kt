@@ -30,7 +30,7 @@ class Dungeon(
         val bytes = matrixString.toByteArray()
         val md = MessageDigest.getInstance("SHA-256")
         val digest = md.digest(bytes)
-        dungeonHash = digest.joinToString { "%02x".format(it) }
+        dungeonHash = digest.joinToString("") { "%02x".format(it) }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -40,14 +40,18 @@ class Dungeon(
         }
     }
 
-    override fun toString(): String {
-        return area.joinToString("\n") {
-            it.joinToString("") {block ->
-                when (block){
-                    Block.GROUND -> "0 "
-                    Block.AIR -> "  "
-                }
+    override fun toString(): String = buildString {
+        for (x in 0 until area.first().size) {
+            append("0   ")
+            for (y in area.indices) {
+                append(
+                    when (area[y][x]) {
+                        Block.GROUND -> "0   "
+                        Block.AIR -> "    "
+                    }
+                )
             }
+            append("0   \n")
         }
     }
 }
